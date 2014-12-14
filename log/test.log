@@ -1,0 +1,678 @@
+  [1m[36m (117.9ms)[0m  [1mCREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "description" text, "image_url" varchar(255), "price" decimal(8,2), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (87.6ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (89.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (88.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141212121918')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (0.1ms)[0m  [1mDELETE FROM "products"[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "products" ("title", "description", "image_url", "price", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', 9.99, '2014-12-14 09:29:19', '2014-12-14 09:29:19', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "products" ("title", "description", "image_url", "price", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', 9.99, '2014-12-14 09:29:19', '2014-12-14 09:29:19', 298486374)[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "products" ("title", "description", "price", "image_url", "created_at", "updated_at", "id") VALUES ('Programming Ruby 1.9', 'Ruby is the fastest growing and most exciting dynamic language out there. If you need to get working programs delivered fast, you should add Ruby to your toolbox.', 49.5, 'ruby.png', '2014-12-14 09:29:19', '2014-12-14 09:29:19', 207281424)
+  [1m[36m (91.5ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+---------------------------
+ProductTest: test_image_url
+---------------------------
+  [1m[36mProduct Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.0ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.0ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+------------------------------------------------------
+ProductTest: test_product_attributes_must_not_be_empty
+------------------------------------------------------
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" IS NULL LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-------------------------------------------------------------
+ProductTest: test_product_is_not_valid_without_a_unique_title
+-------------------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 207281424]]
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'Programming Ruby 1.9' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+--------------------------------------------------------------------
+ProductTest: test_product_is_not_valid_without_a_unique_title_-_i18n
+--------------------------------------------------------------------
+  [1m[36mProduct Load (0.0ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 207281424]]
+  [1m[35mProduct Exists (0.0ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'Programming Ruby 1.9' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+------------------------------------------------
+ProductTest: test_product_price_must_be_positive
+------------------------------------------------
+  [1m[36mProduct Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+--------------------------------------------------
+ProductsControllerTest: test_should_create_product
+--------------------------------------------------
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "products"[0m
+Processing by ProductsController#create as HTML
+  Parameters: {"product"=>{"title"=>"Lorem Ipsum", "description"=>"Wibbles are fun!", "image_url"=>"lorem.jpg", "price"=>"19.95"}}
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mProduct Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'Lorem Ipsum' LIMIT 1[0m
+  [1m[35mSQL (13.1ms)[0m  INSERT INTO "products" ("created_at", "description", "image_url", "price", "title", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sun, 14 Dec 2014 09:29:19 UTC +00:00], ["description", "Wibbles are fun!"], ["image_url", "lorem.jpg"], ["price", #<BigDecimal:2deafd8,'0.1995E2',18(18)>], ["title", "Lorem Ipsum"], ["updated_at", Sun, 14 Dec 2014 09:29:19 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/products/980190963
+Completed 302 Found in 16ms (ActiveRecord: 13.3ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "products"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+---------------------------------------------------
+ProductsControllerTest: test_should_destroy_product
+---------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "products"
+Processing by ProductsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProduct Load (0.0ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", "980190962"]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "products" WHERE "products"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/products
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "products"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+ProductsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[35mProduct Load (0.0ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by ProductsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProduct Load (0.0ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", "980190962"]]
+ERROR: compiling _app_views_products__form_html_erb__3494540223686067467_32481720 RAISED /home/alexander/projects/rails/depot/app/views/products/_form.html.erb:15: syntax error, unexpected ':'
+...utput_buffer.append=( f.label : title );@output_buffer.safe_...
+...                               ^
+/home/alexander/projects/rails/depot/app/views/products/_form.html.erb:16: syntax error, unexpected ':'
+..._buffer.append=( f.text_field : title );@output_buffer.safe_...
+...                               ^
+Function body:           def _app_views_products__form_html_erb__3494540223686067467_32481720(local_assigns, output_buffer)
+            _old_virtual_path, @virtual_path = @virtual_path, "products/_form";_old_output_buffer = @output_buffer;;@output_buffer = output_buffer || ActionView::OutputBuffer.new;@output_buffer.append=  form_for(@product) do |f| @output_buffer.safe_append='
+';   if @product.errors.any? 
+@output_buffer.safe_append='    <div id="error_explanation">
+      <h2>';@output_buffer.append=( pluralize(@product.errors.count, "error") );@output_buffer.safe_append=' prohibited this product from being saved:</h2>
+
+      <ul>
+';       @product.errors.full_messages.each do |msg| 
+@output_buffer.safe_append='        <li>';@output_buffer.append=( msg );@output_buffer.safe_append='</li>
+';       end 
+@output_buffer.safe_append='      </ul>
+    </div>
+';   end 
+@output_buffer.safe_append='
+  <div class="field">
+    ';@output_buffer.append=( f.label : title );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_field : title );@output_buffer.safe_append='
+  </div>
+  <div class="field">
+    ';@output_buffer.append=( f.label :description );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_area :description );@output_buffer.safe_append='
+  </div>
+  <div class="field">
+    ';@output_buffer.append=( f.label :image_url );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_field :image_url );@output_buffer.safe_append='
+  </div>
+  <div class="field">
+    ';@output_buffer.append=( f.label :price );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_field :price );@output_buffer.safe_append='
+  </div>
+  <div class="actions">
+    ';@output_buffer.append=( f.submit );@output_buffer.safe_append='
+  </div>
+'; end 
+@output_buffer.to_s
+          ensure
+            @virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+
+Backtrace: /home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:299:in `module_eval'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:299:in `compile'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:248:in `block in compile!'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:236:in `synchronize'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:236:in `compile!'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:142:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:141:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb:306:in `render_partial'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb:279:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb:278:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/renderer.rb:47:in `render_partial'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/home/alexander/projects/rails/depot/app/views/products/edit.html.erb:3:in `_app_views_products_edit_html_erb__1326463068066751984_30534500'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:143:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:141:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:49:in `block (2 levels) in render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:48:in `block in render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:56:in `render_with_layout'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:47:in `render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:17:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/renderer.rb:42:in `render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/renderer.rb:23:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:127:in `_render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/streaming.rb:219:in `_render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:120:in `render_to_body'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rendering.rb:33:in `render_to_body'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/renderers.rb:26:in `render_to_body'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:97:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rendering.rb:16:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+/home/alexander/.rvm/rubies/ruby-2.0.0-p598/lib/ruby/2.0.0/benchmark.rb:296:in `realtime'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/core_ext/benchmark.rb:12:in `ms'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activerecord-4.0.0/lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:40:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/base.rb:189:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rendering.rb:10:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/callbacks.rb:413:in `_run__1915976926181183078__process_action__callbacks'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/callbacks.rb:80:in `run_callbacks'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rescue.rb:29:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/params_wrapper.rb:245:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activerecord-4.0.0/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/base.rb:136:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:44:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/test_case.rb:569:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/test_case.rb:64:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/test_case.rb:469:in `get'
+/home/alexander/projects/rails/depot/test/controllers/products_controller_test.rb:48:in `block in <class:ProductsControllerTest>'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1258:in `run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:933:in `block in _run_suite'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:926:in `map'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:926:in `_run_suite'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/parallel_each.rb:71:in `block in _run_suites'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/parallel_each.rb:71:in `map'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/parallel_each.rb:71:in `_run_suites'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:877:in `_run_anything'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1085:in `run_tests'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1072:in `block in _run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1071:in `each'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1071:in `_run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1059:in `run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:795:in `block in autorun'
+  Rendered products/_form.html.erb (1.4ms)
+Completed 500 Internal Server Error in 7ms
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+---------------------------------------------
+ProductsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products"[0m
+Completed 200 OK in 672ms (Views: 671.3ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+-------------------------------------------
+ProductsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by ProductsController#new as HTML
+ERROR: compiling _app_views_products__form_html_erb__3494540223686067467_32481720 RAISED /home/alexander/projects/rails/depot/app/views/products/_form.html.erb:15: syntax error, unexpected ':'
+...utput_buffer.append=( f.label : title );@output_buffer.safe_...
+...                               ^
+/home/alexander/projects/rails/depot/app/views/products/_form.html.erb:16: syntax error, unexpected ':'
+..._buffer.append=( f.text_field : title );@output_buffer.safe_...
+...                               ^
+Function body:           def _app_views_products__form_html_erb__3494540223686067467_32481720(local_assigns, output_buffer)
+            _old_virtual_path, @virtual_path = @virtual_path, "products/_form";_old_output_buffer = @output_buffer;;@output_buffer = output_buffer || ActionView::OutputBuffer.new;@output_buffer.append=  form_for(@product) do |f| @output_buffer.safe_append='
+';   if @product.errors.any? 
+@output_buffer.safe_append='    <div id="error_explanation">
+      <h2>';@output_buffer.append=( pluralize(@product.errors.count, "error") );@output_buffer.safe_append=' prohibited this product from being saved:</h2>
+
+      <ul>
+';       @product.errors.full_messages.each do |msg| 
+@output_buffer.safe_append='        <li>';@output_buffer.append=( msg );@output_buffer.safe_append='</li>
+';       end 
+@output_buffer.safe_append='      </ul>
+    </div>
+';   end 
+@output_buffer.safe_append='
+  <div class="field">
+    ';@output_buffer.append=( f.label : title );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_field : title );@output_buffer.safe_append='
+  </div>
+  <div class="field">
+    ';@output_buffer.append=( f.label :description );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_area :description );@output_buffer.safe_append='
+  </div>
+  <div class="field">
+    ';@output_buffer.append=( f.label :image_url );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_field :image_url );@output_buffer.safe_append='
+  </div>
+  <div class="field">
+    ';@output_buffer.append=( f.label :price );@output_buffer.safe_append='<br>
+    ';@output_buffer.append=( f.text_field :price );@output_buffer.safe_append='
+  </div>
+  <div class="actions">
+    ';@output_buffer.append=( f.submit );@output_buffer.safe_append='
+  </div>
+'; end 
+@output_buffer.to_s
+          ensure
+            @virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+
+Backtrace: /home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:299:in `module_eval'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:299:in `compile'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:248:in `block in compile!'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:236:in `synchronize'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:236:in `compile!'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:142:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:141:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb:306:in `render_partial'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb:279:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb:278:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/renderer.rb:47:in `render_partial'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/home/alexander/projects/rails/depot/app/views/products/new.html.erb:3:in `_app_views_products_new_html_erb__2858663311793024206_24604540'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:143:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/template.rb:141:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:49:in `block (2 levels) in render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/abstract_renderer.rb:38:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:48:in `block in render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:56:in `render_with_layout'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:47:in `render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/template_renderer.rb:17:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/renderer.rb:42:in `render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_view/renderer/renderer.rb:23:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:127:in `_render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/streaming.rb:219:in `_render_template'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:120:in `render_to_body'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rendering.rb:33:in `render_to_body'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/renderers.rb:26:in `render_to_body'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:97:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rendering.rb:16:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:41:in `block (2 levels) in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+/home/alexander/.rvm/rubies/ruby-2.0.0-p598/lib/ruby/2.0.0/benchmark.rb:296:in `realtime'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/core_ext/benchmark.rb:12:in `ms'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:41:in `block in render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:84:in `cleanup_view_runtime'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activerecord-4.0.0/lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:40:in `render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/base.rb:189:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rendering.rb:10:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/callbacks.rb:413:in `_run__1915976926181183078__process_action__callbacks'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/callbacks.rb:80:in `run_callbacks'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/rescue.rb:29:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:31:in `block in process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `block in instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activesupport-4.0.0/lib/active_support/notifications.rb:159:in `instrument'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/metal/params_wrapper.rb:245:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/activerecord-4.0.0/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/base.rb:136:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/abstract_controller/rendering.rb:44:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/test_case.rb:569:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/test_case.rb:64:in `process'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/actionpack-4.0.0/lib/action_controller/test_case.rb:469:in `get'
+/home/alexander/projects/rails/depot/test/controllers/products_controller_test.rb:28:in `block in <class:ProductsControllerTest>'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1258:in `run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:933:in `block in _run_suite'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:926:in `map'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:926:in `_run_suite'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/parallel_each.rb:71:in `block in _run_suites'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/parallel_each.rb:71:in `map'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/parallel_each.rb:71:in `_run_suites'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:877:in `_run_anything'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1085:in `run_tests'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1072:in `block in _run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1071:in `each'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1071:in `_run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:1059:in `run'
+/home/alexander/.rvm/gems/ruby-2.0.0-p598/gems/minitest-4.7.5/lib/minitest/unit.rb:795:in `block in autorun'
+  Rendered products/_form.html.erb (0.5ms)
+Completed 500 Internal Server Error in 2ms
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+------------------------------------------------
+ProductsControllerTest: test_should_show_product
+------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mProduct Load (0.0ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", "980190962"]]
+Completed 200 OK in 2ms (Views: 1.6ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+--------------------------------------------------
+ProductsControllerTest: test_should_update_product
+--------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by ProductsController#update as HTML
+  Parameters: {"product"=>{"title"=>"Lorem Ipsum", "description"=>"Wibbles are fun!", "image_url"=>"lorem.jpg", "price"=>"19.95"}, "id"=>"980190962"}
+  [1m[35mProduct Load (0.0ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", "980190962"]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE ("products"."title" = 'Lorem Ipsum' AND "products"."id" != 980190962) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "products" SET "title" = ?, "description" = ?, "image_url" = ?, "price" = ?, "updated_at" = ? WHERE "products"."id" = 980190962[0m  [["title", "Lorem Ipsum"], ["description", "Wibbles are fun!"], ["image_url", "lorem.jpg"], ["price", #<BigDecimal:3d47a58,'0.1995E2',18(18)>], ["updated_at", Sun, 14 Dec 2014 09:29:20 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/products/980190962
+Completed 302 Found in 4ms (ActiveRecord: 0.4ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+------------------------------------------
+StoreControllerTest: test_should_get_index
+------------------------------------------
+Processing by StoreController#index as HTML
+Completed 500 Internal Server Error in 2ms
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36m (91.4ms)[0m  [1mCREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "description" text, "image_url" varchar(255), "price" decimal(8,2), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (88.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (89.4ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (88.8ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141212121918')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (0.1ms)[0m  [1mDELETE FROM "products"[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "products" ("title", "description", "image_url", "price", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', 9.99, '2014-12-14 09:31:10', '2014-12-14 09:31:10', 980190962)
+  [1m[36mFixture Insert (0.0ms)[0m  [1mINSERT INTO "products" ("title", "description", "image_url", "price", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', 9.99, '2014-12-14 09:31:10', '2014-12-14 09:31:10', 298486374)[0m
+  [1m[35mFixture Insert (0.0ms)[0m  INSERT INTO "products" ("title", "description", "price", "image_url", "created_at", "updated_at", "id") VALUES ('Programming Ruby 1.9', 'Ruby is the fastest growing and most exciting dynamic language out there. If you need to get working programs delivered fast, you should add Ruby to your toolbox.', 49.5, 'ruby.png', '2014-12-14 09:31:10', '2014-12-14 09:31:10', 207281424)
+  [1m[36m (83.4ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+---------------------------
+ProductTest: test_image_url
+---------------------------
+  [1m[36mProduct Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.0ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.0ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.0ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+------------------------------------------------------
+ProductTest: test_product_attributes_must_not_be_empty
+------------------------------------------------------
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" IS NULL LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-------------------------------------------------------------
+ProductTest: test_product_is_not_valid_without_a_unique_title
+-------------------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 207281424]]
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'Programming Ruby 1.9' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+--------------------------------------------------------------------
+ProductTest: test_product_is_not_valid_without_a_unique_title_-_i18n
+--------------------------------------------------------------------
+  [1m[36mProduct Load (0.0ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 207281424]]
+  [1m[35mProduct Exists (0.0ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'Programming Ruby 1.9' LIMIT 1
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+------------------------------------------------
+ProductTest: test_product_price_must_be_positive
+------------------------------------------------
+  [1m[36mProduct Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1
+  [1m[36mProduct Exists (0.0ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'My Book Title' LIMIT 1[0m
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+--------------------------------------------------
+ProductsControllerTest: test_should_create_product
+--------------------------------------------------
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "products"[0m
+Processing by ProductsController#create as HTML
+  Parameters: {"product"=>{"title"=>"Lorem Ipsum", "description"=>"Wibbles are fun!", "image_url"=>"lorem.jpg", "price"=>"19.95"}}
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mProduct Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "products" WHERE "products"."title" = 'Lorem Ipsum' LIMIT 1[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "products" ("created_at", "description", "image_url", "price", "title", "updated_at") VALUES (?, ?, ?, ?, ?, ?)  [["created_at", Sun, 14 Dec 2014 09:31:10 UTC +00:00], ["description", "Wibbles are fun!"], ["image_url", "lorem.jpg"], ["price", #<BigDecimal:30fec38,'0.1995E2',18(18)>], ["title", "Lorem Ipsum"], ["updated_at", Sun, 14 Dec 2014 09:31:10 UTC +00:00]]
+  [1m[36m (0.0ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/products/980190963
+Completed 302 Found in 4ms (ActiveRecord: 0.8ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "products"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+---------------------------------------------------
+ProductsControllerTest: test_should_destroy_product
+---------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "products"
+Processing by ProductsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProduct Load (0.0ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", "980190962"]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "products" WHERE "products"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/products
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "products"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+ProductsControllerTest: test_should_get_edit
+--------------------------------------------
+  [1m[35mProduct Load (0.0ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by ProductsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mProduct Load (0.0ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", "980190962"]]
+  Rendered products/_form.html.erb (7.7ms)
+Completed 200 OK in 21ms (Views: 20.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+---------------------------------------------
+ProductsControllerTest: test_should_get_index
+---------------------------------------------
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products"[0m
+Completed 200 OK in 27ms (Views: 26.7ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+-------------------------------------------
+ProductsControllerTest: test_should_get_new
+-------------------------------------------
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by ProductsController#new as HTML
+  Rendered products/_form.html.erb (2.2ms)
+Completed 200 OK in 4ms (Views: 3.5ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+------------------------------------------------
+ProductsControllerTest: test_should_show_product
+------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by ProductsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mProduct Load (0.0ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", "980190962"]]
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+--------------------------------------------------
+ProductsControllerTest: test_should_update_product
+--------------------------------------------------
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by ProductsController#update as HTML
+  Parameters: {"product"=>{"title"=>"Lorem Ipsum", "description"=>"Wibbles are fun!", "image_url"=>"lorem.jpg", "price"=>"19.95"}, "id"=>"980190962"}
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1  [["id", "980190962"]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mProduct Exists (0.1ms)[0m  SELECT 1 AS one FROM "products" WHERE ("products"."title" = 'Lorem Ipsum' AND "products"."id" != 980190962) LIMIT 1
+  [1m[36mSQL (0.2ms)[0m  [1mUPDATE "products" SET "title" = ?, "description" = ?, "image_url" = ?, "price" = ?, "updated_at" = ? WHERE "products"."id" = 980190962[0m  [["title", "Lorem Ipsum"], ["description", "Wibbles are fun!"], ["image_url", "lorem.jpg"], ["price", #<BigDecimal:54cfc48,'0.1995E2',18(18)>], ["updated_at", Sun, 14 Dec 2014 09:31:10 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/products/980190962
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+------------------------------------------
+StoreControllerTest: test_should_get_index
+------------------------------------------
+Processing by StoreController#index as HTML
+Completed 500 Internal Server Error in 3ms
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[36m (89.9ms)[0m  [1mCREATE TABLE "carts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (85.4ms)[0m  CREATE TABLE "line_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "cart_id" integer, "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (85.8ms)[0m  [1mCREATE INDEX "index_line_items_on_cart_id" ON "line_items" ("cart_id")[0m
+  [1m[35m (85.7ms)[0m  CREATE INDEX "index_line_items_on_product_id" ON "line_items" ("product_id")
+  [1m[36m (86.0ms)[0m  [1mCREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "description" text, "image_url" varchar(255), "price" decimal(8,2), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (84.7ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (86.0ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT version FROM "schema_migrations"
+  [1m[36m (85.7ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141214094707')[0m
+  [1m[35m (86.2ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20141212121918')
+  [1m[36m (86.2ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20141214093830')[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mFixture Delete (0.1ms)[0m  [1mDELETE FROM "line_items"[0m
+  [1m[35mFixture Insert (0.1ms)[0m  INSERT INTO "line_items" ("product_id", "cart_id", "created_at", "updated_at", "id") VALUES (NULL, NULL, '2014-12-14 12:04:47', '2014-12-14 12:04:47', 980190962)
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "line_items" ("product_id", "cart_id", "created_at", "updated_at", "id") VALUES (NULL, NULL, '2014-12-14 12:04:47', '2014-12-14 12:04:47', 298486374)[0m
+  [1m[35mFixture Delete (0.0ms)[0m  DELETE FROM "products"
+  [1m[36mFixture Insert (0.1ms)[0m  [1mINSERT INTO "products" ("title", "description", "image_url", "price", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', 9.99, '2014-12-14 12:04:47', '2014-12-14 12:04:47', 980190962)[0m
+  [1m[35mFixture Insert (0.0ms)[0m  INSERT INTO "products" ("title", "description", "image_url", "price", "created_at", "updated_at", "id") VALUES ('MyString', 'MyText', 'MyString', 9.99, '2014-12-14 12:04:47', '2014-12-14 12:04:47', 298486374)
+  [1m[36mFixture Insert (0.0ms)[0m  [1mINSERT INTO "products" ("title", "description", "price", "image_url", "created_at", "updated_at", "id") VALUES ('Programming Ruby 1.9', 'Ruby is the fastest growing and most exciting dynamic language out there. If you need to get working programs delivered fast, you should add Ruby to your toolbox.', 49.5, 'ruby.png', '2014-12-14 12:04:47', '2014-12-14 12:04:47', 207281424)[0m
+  [1m[35mFixture Delete (0.0ms)[0m  DELETE FROM "carts"
+  [1m[36mFixture Insert (0.0ms)[0m  [1mINSERT INTO "carts" ("created_at", "updated_at", "id") VALUES ('2014-12-14 12:04:47', '2014-12-14 12:04:47', 980190962)[0m
+  [1m[35mFixture Insert (0.0ms)[0m  INSERT INTO "carts" ("created_at", "updated_at", "id") VALUES ('2014-12-14 12:04:47', '2014-12-14 12:04:47', 298486374)
+  [1m[36m (85.0ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+-----------------------------------------------------
+LineItemsControllerTest: test_should_create_line_item
+-----------------------------------------------------
+  [1m[36mLineItem Load (0.2ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "line_items"
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", 207281424]]
+Processing by LineItemsController#create as HTML
+  Parameters: {"product_id"=>"207281424"}
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", Sun, 14 Dec 2014 12:04:47 UTC +00:00], ["updated_at", Sun, 14 Dec 2014 12:04:47 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mProduct Load (0.0ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT 1[0m  [["id", "207281424"]]
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "line_items" ("cart_id", "created_at", "product_id", "updated_at") VALUES (?, ?, ?, ?)[0m  [["cart_id", 980190963], ["created_at", Sun, 14 Dec 2014 12:04:47 UTC +00:00], ["product_id", 207281424], ["updated_at", Sun, 14 Dec 2014 12:04:47 UTC +00:00]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? ORDER BY "carts"."id" ASC LIMIT 1[0m  [["id", 980190963]]
+Redirected to http://test.host/carts/980190963
+Completed 302 Found in 37ms (ActiveRecord: 1.2ms)
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "line_items"
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+------------------------------------------------------
+LineItemsControllerTest: test_should_destroy_line_item
+------------------------------------------------------
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  SELECT COUNT(*) FROM "line_items"
+Processing by LineItemsController#destroy as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mLineItem Load (0.0ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1[0m  [["id", "980190962"]]
+  [1m[35m (0.0ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "line_items" WHERE "line_items"."id" = ?[0m  [["id", 980190962]]
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/line_items
+Completed 302 Found in 1ms (ActiveRecord: 0.2ms)
+  [1m[36m (0.0ms)[0m  [1mSELECT COUNT(*) FROM "line_items"[0m
+  [1m[35m (0.1ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+---------------------------------------------
+LineItemsControllerTest: test_should_get_edit
+---------------------------------------------
+  [1m[35mLineItem Load (0.0ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by LineItemsController#edit as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[36mLineItem Load (0.0ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1[0m  [["id", "980190962"]]
+  Rendered line_items/_form.html.erb (6.1ms)
+Completed 200 OK in 255ms (Views: 254.5ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  rollback transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+----------------------------------------------
+LineItemsControllerTest: test_should_get_index
+----------------------------------------------
+  [1m[35mLineItem Load (0.2ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by LineItemsController#index as HTML
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items"[0m
+Completed 200 OK in 3ms (Views: 2.5ms | ActiveRecord: 0.1ms)
+  [1m[35m (0.0ms)[0m  rollback transaction
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+--------------------------------------------
+LineItemsControllerTest: test_should_get_new
+--------------------------------------------
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1  [["id", 980190962]]
+Processing by LineItemsController#new as HTML
+  Rendered line_items/_form.html.erb (1.7ms)
+Completed 200 OK in 3ms (Views: 3.0ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.1ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+---------------------------------------------------
+LineItemsControllerTest: test_should_show_line_item
+---------------------------------------------------
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by LineItemsController#show as HTML
+  Parameters: {"id"=>"980190962"}
+  [1m[35mLineItem Load (0.0ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1  [["id", "980190962"]]
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+-----------------------------------------------------
+LineItemsControllerTest: test_should_update_line_item
+-----------------------------------------------------
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1[0m  [["id", 980190962]]
+Processing by LineItemsController#update as HTML
+  Parameters: {"line_item"=>{"cart_id"=>nil, "product_id"=>nil}, "id"=>"980190962"}
+  [1m[35mLineItem Load (0.0ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."id" = ? LIMIT 1  [["id", "980190962"]]
+  [1m[36m (0.0ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35m (0.0ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/line_items/980190962
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms)
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
